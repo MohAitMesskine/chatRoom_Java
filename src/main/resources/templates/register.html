@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-8">
+<div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Create an Account</h2>
+
+    <form th:action="@{/register}" method="post" th:object="${userRegistrationDto}" class="space-y-4" id="registrationForm" onsubmit="return validateForm()">
+        <!-- Error message display -->
+        <div th:if="${param.error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <p th:text="${param.error == 'passwordMismatch'} ? 'Passwords do not match' : 'Registration failed'"></p>
+        </div>
+
+        <div th:if="${#fields.hasErrors('*')}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div>
+
+        <!-- Username Field -->
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+            <input type="text" id="username" name="username" required minlength="3" maxlength="50"
+                   th:field="*{username}"
+                   class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="Choose a username">
+            <p id="usernameError" class="mt-1 text-sm text-red-600 hidden"></p>
+        </div>
+
+        <!-- Email Field -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <input type="email" id="email" name="email" required
+                   th:field="*{email}"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                   class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="you@example.com">
+            <p id="emailError" class="mt-1 text-sm text-red-600 hidden"></p>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <input type="password" id="password" name="password" required minlength="8"
+                   th:field="*{password}"
+                   class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="Create a password">
+            <p id="passwordError" class="mt-1 text-sm text-red-600 hidden"></p>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div>
+            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required
+                   th:field="*{confirmPassword}"
+                   class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   placeholder="Repeat your password">
+            <p id="confirmPasswordError" class="mt-1 text-sm text-red-600 hidden"></p>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Register
+            </button>
+        </div>
+
+        <!-- Login Link -->
+        <div class="text-center mt-4">
+            <p class="text-sm text-gray-600">
+                Already have an account?
+                <a href="/login" class="font-medium text-blue-600 hover:text-blue-500">Login here</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        // Reset error messages
+        document.querySelectorAll('.text-red-600').forEach(el => el.classList.add('hidden'));
+
+        // Username validation
+        if (username.value.length < 3) {
+            document.getElementById('usernameError').textContent = 'Username must be at least 3 characters long';
+            document.getElementById('usernameError').classList.remove('hidden');
+            isValid = false;
+        }
+
+        // Email validation
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email.value)) {
+            document.getElementById('emailError').textContent = 'Please enter a valid email address';
+            document.getElementById('emailError').classList.remove('hidden');
+            isValid = false;
+        }
+
+        // Password validation
+        if (password.value.length < 8) {
+            document.getElementById('passwordError').textContent = 'Password must be at least 8 characters long';
+            document.getElementById('passwordError').classList.remove('hidden');
+            isValid = false;
+        }
+
+        // Confirm password validation
+        if (password.value !== confirmPassword.value) {
+            document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+            document.getElementById('confirmPasswordError').classList.remove('hidden');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+</body>
+</html>
