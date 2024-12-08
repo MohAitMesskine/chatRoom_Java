@@ -4,6 +4,7 @@ import com.example.chatRoom.dto.UserLoginDto;
 import com.example.chatRoom.dto.UserRegistrationDto;
 import com.example.chatRoom.model.User;
 import com.example.chatRoom.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,16 +19,16 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, HttpSession httpSession) {
         this.userService = userService;
     }
 
     @GetMapping("/home")
-    public String home() {
+    public String home(HttpSession httpSession) {
         // Add authentication check
-        /*if (!isAuthenticated()) {
+        if (!isAuthenticated(httpSession)) {
             return "redirect:/login";
-        }*/
+        }
         return "home";
     }
 
@@ -84,12 +85,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(UserLoginDto loginDto){
+    public String loginUser(UserLoginDto loginDto, HttpSession httpSession){
         try {
             User user = userService.authenticateUsr(loginDto.getUsername(), loginDto.getPassword());
             if (user != null) {
                 // Implement session management here tal mn ba3d
-                //System.out.println("User logged in successfully");
+                System.out.println("User logged in successfully");
+                httpSession.setAttribute("username", user.getUsername());
                 return "redirect:/home";
             }
         } catch (Exception e) {
@@ -100,8 +102,8 @@ public class UserController {
     }
 
     // Add this method to check if user is authenticated
-    private boolean isAuthenticated() {
+    private boolean isAuthenticated(HttpSession httpSession) {
         // Implement your authentication check logic here
-        return false;
+        return httpSession.getAttribute("username") != null;
     }
 }
