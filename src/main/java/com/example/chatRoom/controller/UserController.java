@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService, HttpSession httpSession) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -90,7 +90,7 @@ public class UserController {
             User user = userService.authenticateUsr(loginDto.getUsername(), loginDto.getPassword());
             if (user != null) {
                 // Implement session management here tal mn ba3d
-                System.out.println("User logged in successfully");
+                //System.out.println("User logged in successfully");
                 httpSession.setAttribute("username", user.getUsername());
                 return "redirect:/home";
             }
