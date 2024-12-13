@@ -48,6 +48,29 @@
     </div>
 </div>
 
+<script>
+    // Fonction pour envoyer un message (ajuster en fonction de votre logique WebSocket ou AJAX)
+    function sendMessage() {
+        const messageInput = document.getElementById('message-input');
+        const messageContent = messageInput.value;
+        if (messageContent.trim() !== '') {
+            const messagesContainer = document.getElementById('messages-container');
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message-item');
+            newMessage.innerHTML = `<p><strong>You</strong>: <span>${messageContent}</span></p>`;
+            messagesContainer.appendChild(newMessage);
+
+            messageInput.value = '';  // Effacer le champ de saisie
+        }
+    }
+
+    // Gérer l'envoi de message avec "Entrée"
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+</script>
 <script src="../static/js/home.js"></script>
 </body>
 </html>
