@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
+    <title>Créer un Compte</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-8">
 <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Create an Account</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Créer Compte pour Rejoindre Conversation Isi</h2>
 
     <form th:action="@{/register}" method="post" th:object="${userRegistrationDto}" class="space-y-4" id="registrationForm" onsubmit="return validateForm()">
         <!-- Error message display -->
@@ -28,38 +28,38 @@
             <input type="text" id="username" name="username" required minlength="3" maxlength="50"
                    th:field="*{username}"
                    class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   placeholder="Choose a username">
+                   placeholder="Choisir un nom d'utilisateur">
             <p id="usernameError" class="mt-1 text-sm text-red-600 hidden"></p>
         </div>
 
         <!-- Email Field -->
         <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Académique</label>
             <input type="email" id="email" name="email" required
                    th:field="*{email}"
                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                    class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   placeholder="you@example.com">
+                   placeholder="VotreEmail@uca.ac.ma">
             <p id="emailError" class="mt-1 text-sm text-red-600 hidden"></p>
         </div>
 
         <!-- Password Field -->
         <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mot De passe</label>
             <input type="password" id="password" name="password" required minlength="8"
                    th:field="*{password}"
                    class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   placeholder="Create a password">
+                   placeholder="Saisir un mot de passe">
             <p id="passwordError" class="mt-1 text-sm text-red-600 hidden"></p>
         </div>
 
         <!-- Confirm Password Field -->
         <div>
-            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required
                    th:field="*{confirmPassword}"
                    class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                   placeholder="Repeat your password">
+                   placeholder="Comfermer Votre mot de passe">
             <p id="confirmPasswordError" class="mt-1 text-sm text-red-600 hidden"></p>
         </div>
 
@@ -67,15 +67,15 @@
         <div>
             <button type="submit"
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Register
+                Enreigstrer
             </button>
         </div>
 
         <!-- Login Link -->
         <div class="text-center mt-4">
             <p class="text-sm text-gray-600">
-                Already have an account?
-                <a href="/login" class="font-medium text-blue-600 hover:text-blue-500">Login here</a>
+                Déja vous etes un compte
+                <a href="/login" class="font-medium text-blue-600 hover:text-blue-500">Authentification Ici</a>
             </p>
         </div>
     </form>

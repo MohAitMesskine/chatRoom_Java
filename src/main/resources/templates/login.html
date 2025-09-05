@@ -2,69 +2,82 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Login Page</title>
+  <title>Connexion</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="/img/fssm.jpg">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-8">
-<div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
-  <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
-  <form th:action="@{/login}" method="post" class="space-y-4">
-    <!-- Error message display -->
-    <div th:if="${param.error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-      Invalid username or password
-    </div>
+<!-- Conteneur flex pour l'image et le formulaire -->
+<div class="max-w-4xl w-full bg-white shadow-md rounded-lg p-8 flex">
 
-    <!-- Username/Email Field -->
-    <div>
-      <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
-        Username or Email
-      </label>
-      <input
-              type="text"
-              id="username"
-              name="username"
-              required
-              class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter your username or email"
-      >
-    </div>
+  <!-- Section de l'image à gauche -->
+  <div class="w-1/2 p-4">
+    <img th:src="@{/img/fs.jpg}" alt="Image de connexion" class="w-full h-full object-cover rounded-lg shadow-md">
+  </div>
 
-    <!-- Password Field -->
-    <div>
-      <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-        Password
-      </label>
-      <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter your password"
-      >
-    </div>
+  <!-- Formulaire de connexion à droite -->
+  <div class="w-1/2 p-4">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">ChatRoom-Isi</h2>
 
-    <!-- Submit Button -->
-    <div>
-      <button
-              type="submit"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-      >
-        Sign In
-      </button>
-    </div>
+    <form th:action="@{/login}" method="post" class="space-y-4">
+      <!-- Message d'erreur -->
+      <div th:if="${param.error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        Erreur de mot de passe
+      </div>
 
-    <!-- Register Link -->
-    <div class="text-center mt-4">
-      <p class="text-sm text-gray-600">
-        Don't have an account?
-        <a href="/register" class="font-medium text-blue-600 hover:text-blue-500">
-          Register here
-        </a>
-      </p>
-    </div>
-  </form>
+      <!-- Champ du code Massar -->
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+          Code Massar
+        </label>
+        <input
+                type="text"
+                id="username"
+                name="username"
+                required
+                class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter votre username(ex:D136290165)"
+        >
+      </div>
+
+      <!-- Champ du mot de passe -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+          Mot de Passe
+        </label>
+        <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter votre mot de passe(ex:d1300000000)"
+        >
+      </div>
+
+      <!-- Bouton de connexion -->
+      <div>
+        <button
+                type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Connexion
+        </button>
+      </div>
+
+      <!-- Lien d'inscription -->
+      <div class="text-center mt-4">
+        <p class="text-sm text-gray-600">
+          Si vous n'avez pas de compte, inscrivez-vous dans la conversation?
+          <a href="/register" class="font-medium text-blue-600 hover:text-blue-500">
+            Enregistrer Ici
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
 </div>
+
 </body>
 </html>

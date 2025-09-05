@@ -23,7 +23,7 @@ function onConnected() {
         JSON.stringify({sender: username, type: 'JOIN'})
     );
 
-    document.getElementById('connection-status').textContent = 'Connected';
+    document.getElementById('connection-status').textContent = 'En Ligne';
 }
 
 function onError(error) {
@@ -62,14 +62,14 @@ function onMessageReceived(payload) {
         messageElement.className = 'flex justify-center';
         messageElement.innerHTML = `
             <div class="bg-gray-200 px-4 py-2 rounded-full">
-                <p class="text-sm text-gray-600">${message.sender} joined the chat</p>
+                <p class="text-sm text-gray-600">${message.sender} joindre a cette Conversation</p>
             </div>
         `;
     } else if (message.type === 'LEAVE') {
         messageElement.className = 'flex justify-center';
         messageElement.innerHTML = `
             <div class="bg-gray-200 px-4 py-2 rounded-full">
-                <p class="text-sm text-gray-600">${message.sender} left the chat</p>
+                <p class="text-sm text-gray-600">${message.sender} Quitter cette Conversation</p>
             </div>
         `;
     } else {
